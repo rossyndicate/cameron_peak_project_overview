@@ -1,0 +1,76 @@
+---
+title: "maps"
+output: html_document
+date: "2022-12-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(sf)
+library(mapview)
+```
+
+## R Markdown
+```{r, echo = FALSE}
+watershed_sbs <- read_csv('data/sbs_watershed.csv') %>%
+  mutate(Watershed_Level=((Unburned*0)+(V_Low*0.1)+(Low*0.4)+(Moderate*0.7)+(High*1))/(Unburned+V_Low+Low+Moderate+High))
+
+# Cameron Peak fire sites
+all_sites <- read_csv('data/cpf_sites.csv' ) %>%
+  mutate( x= Long, 
+          y= Lat)%>%
+  st_as_sf(coords=c("Long","Lat"), crs=4326) %>%
+  left_join(select(watershed_sbs,c(Code=SITE_CODE,Burn_Index=Watershed_Level)),by="Code")
+
+Reservoir_Network <- filter(all_sites, !is.na(Burn_Index)) %>%
+  select(Site,Code,DO_Sensor,UCLP_Monitoring_Program,Burn_Index)
+
+Tributaries <- filter(all_sites, Campaign == "Tributary Study") %>%
+  select(Site,Code)
+
+Mainstem <- filter(all_sites, Campaign == "Mainstem") %>%
+  select(Site,Code,DO_Sensor,UCLP_Monitoring_Program)
+
+cpf <- st_read('data/cpf_boundary.shp')
+```
+
+```{r, }
+map <-
+mapview(Reservoir_Network,
+        col.regions = c("#0072B2","#56B4E9","#F0E442","#E69F00","#D55E00"),
+        zcol = "Burn_Index",
+        alpha.regions = 1,
+        alpha = 0.75,
+        cex = 8, 
+        lwd = 1,
+        label = FALSE,
+        map.types="OpenStreetMap",
+        layer.name = "Reservoir Network (by Burn Index)") +
+mapview(Mainstem,
+        col.regions = "light grey",
+        alpha.regions = 1,
+        alpha = 0.75,
+        cex = 8, 
+        lwd = 1,
+        map.types="OpenStreetMap",
+        layer.name = "Mainstem Sites") +
+mapview(Tributaries,
+        col.regions = "dark grey",
+        alpha.regions = 1,
+        alpha = 0.75,
+        cex = 3, 
+        lwd = 1,
+        map.types="OpenStreetMap",
+        layer.name = "Tributary Study Sites") +
+mapview(cpf,
+        col.regions = "dark red",
+        alpha.regions = 0.1,
+        alpha = 1,
+        map.types="OpenStreetMap",
+        layer.name = "CPF Burn Scar",
+        legend = F)
+
+mapshot(map, 'index.html')
+```
+

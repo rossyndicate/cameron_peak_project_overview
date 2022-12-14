@@ -1,0 +1,41 @@
+Site,Code,Lat,Long,Campaign,DO_Sensor,UCLP_Monitoring_Program
+Barnes Meadow Outflow,BMD,40.60065,-105.836717,Reservoir Study,,X
+Joe Wright Reservoir,JOER,40.55593744,-105.8749619,Reservoir Study,,
+Joe Wright Outflow/Chambers Inflow,CBRI,40.57795281,-105.8572773,Reservoir Study,X,
+Chambers Outflow,CHD,40.60233229,-105.8427286,Reservoir Study,X,X
+Chambers Reservoir,CBRR,40.60438415,-105.8432698,Reservoir Study,,
+Joe Wright Inflow,JOEI,40.54013102,-105.8831698,Reservoir Study,X,
+Barnes Meadow Reservoir,BRNR,40.599908,-105.830604,Reservoir Study,,
+Long Draw Reservoir,LNGR,40.50087627,-105.7725307,Reservoir Study,,
+Long Draw Outflow,LNGO,40.50368571,-105.7709459,Reservoir Study,,
+Peterson Outflow,PTRO,40.56063874,-105.7929021,Reservoir Study,,
+Peterson Reservoir,PTRR,40.55936515,-105.7940034,Reservoir Study,,
+Joe Wright Creek above the Poudre,JWC,40.62055,-105.8183,Mainstem,X,X
+Poudre above Joe Wright Creek,PJW,40.634567,-105.807017,Mainstem,X,X
+Poudre at Rustic,PBR,40.700221,-105.544028,Mainstem,X,X
+Poudre below the South Fork,PSF,40.694953,-105.448748,Mainstem,X,X
+Poudre above the North Fork,PNF,40.702459,-105.241588,Mainstem,X,X
+Poudre below Bellvue Diversion,PBD,40.663976,-105.215337,Mainstem,X,X
+Sleeping Elephant,SLEP,40.682439,-105.771986,Mainstem,,
+South Fork of the Poudre,SFM,40.61825,-105.525583,Mainstem,X,X
+Beaver Creek,BEAV,40.579336,-105.5940998,Reservoir Study,,
+Hourglass Inflow,HORI,40.5805091,-105.6409321,Reservoir Study,,
+Comanche Outflow,COMO,40.5846048,-105.6440011,Reservoir Study,,
+Comanche Reservoir,COMR,40.5853086,-105.6455009,Reservoir Study,,
+Hourglass Reservoir,HORR,40.582032,-105.6314023,Reservoir Study,,
+Hourglass Outflow,HORO,40.5828742,-105.6309523,Reservoir Study,,
+Comanche Inflow,COMI,40.5858963,-105.6626,Reservoir Study,,
+Sheep Creek,SHEP,40.69487299,-105.6256411,Tributary Study,,
+Bennett Creek,BENN,40.65821647,-105.5409381,Tributary Study,,
+Black Hollow Creek,BLAK,40.695486,-105.648333,Tributary Study,,
+Fish Creek,FISH,40.603996,-105.546507,Tributary Study,,
+Little Beaver Creek,LBEA,40.624819,-105.532595,Tributary Study,,
+Roaring Creek,ROAR,40.71825826,-105.7392645,Tributary Study,,
+Pennock Creek,PENN,40.57855879,-105.5441506,Tributary Study,,
+South Lone Pine Creek,SOLP,40.78860289,-105.6011062,Tributary Study,,
+Sevenmile Creek,SEVN,40.70582545,-105.5877759,Tributary Study,,
+Sawmill Creek,SAWM,40.581377,-105.856229,Tributary Study,,
+North Joe Wright Creek,NJOE,40.57291676,-105.863055,Tributary Study,,
+Deadman Creek,DEAD,40.81469082,-105.8019705,Tributary Study,,
+North Fork of the Poudre,PONO,40.81355942,-105.710882,Tributary Study,,
+Fall Creek,FALL,40.6001925,-105.8673455,Tributary Study,,
