@@ -12,7 +12,7 @@ library(mapview)
 ```
 
 ## R Markdown
-```{r, echo = FALSE}
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 watershed_sbs <- read_csv('data/sbs_watershed.csv') %>%
   mutate(Watershed_Level=((Unburned*0)+(V_Low*0.1)+(Low*0.4)+(Moderate*0.7)+(High*1))/(Unburned+V_Low+Low+Moderate+High))
 
@@ -29,14 +29,14 @@ Reservoir_Network <- filter(all_sites, !is.na(Burn_Index)) %>%
 Tributaries <- filter(all_sites, Campaign == "Tributary Study") %>%
   select(Site,Code)
 
+Extra <- filter(all_sites, Code %in% c("BEAV","SFM")) %>%
+  select(Site,Code,DO_Sensor,UCLP_Monitoring_Program, Burn_Index)
+
 Mainstem <- filter(all_sites, Campaign == "Mainstem") %>%
   select(Site,Code,DO_Sensor,UCLP_Monitoring_Program)
 
 cpf <- st_read('data/cpf_boundary.shp')
-```
 
-```{r, }
-map <-
 mapview(Reservoir_Network,
         col.regions = c("#0072B2","#56B4E9","#F0E442","#E69F00","#D55E00"),
         zcol = "Burn_Index",
@@ -47,29 +47,83 @@ mapview(Reservoir_Network,
         label = FALSE,
         map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
         layer.name = "Reservoir Network (by Burn Index)") +
-mapview(Mainstem,
-        col.regions = "dark grey",
+mapview(Extra,
+        col.regions = 'dark grey',
         alpha.regions = 1,
         alpha = 1,
         cex = 8, 
         lwd = 1,
+        label = FALSE,
         map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
-        layer.name = "Mainstem Sites") +
+        legend = FALSE,
+        homebutton = FALSE) +
+mapview(Mainstem,
+          col.regions = "dark grey",
+          alpha.regions = 1,
+          alpha = 1,
+          cex = 8, 
+          lwd = 1,
+          map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+          layer.name = "Downstream of Reservoir Network") +
 mapview(Tributaries,
-        col.regions = "black",
-        alpha.regions = 1,
-        alpha = 0.75,
-        cex = 4, 
-        lwd = 1,
-        map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
-        layer.name = "Tributary Study Sites") +
+          col.regions = "black",
+          alpha.regions = 1,
+          alpha = 0.75,
+          cex = 4, 
+          lwd = 1,
+          map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+          layer.name = "Tributary Study Sites") +
 mapview(cpf,
-        col.regions = "dark red",
-        alpha.regions = 0.1,
+          col.regions = "dark red",
+          alpha.regions = 0.1,
+          alpha = 1,
+          map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+          layer.name = "CPF Burn Scar",
+          legend = F)
+
+map <- mapview(Reservoir_Network,
+        col.regions = c("#0072B2","#56B4E9","#F0E442","#E69F00","#D55E00"),
+        zcol = "Burn_Index",
+        alpha.regions = 1,
         alpha = 1,
+        cex = 8, 
+        lwd = 1,
+        label = FALSE,
         map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
-        layer.name = "CPF Burn Scar",
-        legend = F)
+        layer.name = "Reservoir Network (by Burn Index)") +
+mapview(Extra,
+        col.regions = 'dark grey',
+        alpha.regions = 1,
+        alpha = 1,
+        cex = 8, 
+        lwd = 1,
+        label = FALSE,
+        map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+        legend = FALSE,
+        homebutton = FALSE) +
+mapview(Mainstem,
+          col.regions = "dark grey",
+          alpha.regions = 1,
+          alpha = 1,
+          cex = 8, 
+          lwd = 1,
+          map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+          layer.name = "Downstream of Reservoir Network") +
+mapview(Tributaries,
+          col.regions = "black",
+          alpha.regions = 1,
+          alpha = 0.75,
+          cex = 4, 
+          lwd = 1,
+          map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+          layer.name = "Tributary Study Sites") +
+mapview(cpf,
+          col.regions = "dark red",
+          alpha.regions = 0.1,
+          alpha = 1,
+          map.types=c("OpenStreetMap", "CartoDB.Positron","Esri.WorldImagery"),
+          layer.name = "CPF Burn Scar",
+          legend = F)
 
 mapshot(map, 'index.html')
 ```
